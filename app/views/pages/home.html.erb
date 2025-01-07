@@ -1,2 +1,26 @@
-<h1>Index de tous les posts</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+
+<div class="container">
+
+<%n = 0  %>
+<% @posts.each do |post| %>
+<%n = n + 1  %>
+<div class="bg-gray-card">
+    <!-- BEGIN app/views/posts/_post.html.erb -->
+  <div class="d-flex pt-2 px-4">
+    <div class="d-flex gap-2">
+      <span class="min-width-24px"><%=n%>.</span>
+      <!-- BEGIN app/views/posts/_post_vote.html.erb -->  <a data-turbo-method="post" data-csrf-token="MCkbc-P_C1N4WzD05sTp1-37l2uW9ZQjhLV1guTbMjcHlzZFyA2C6QV8BcHztaeikrVjPWsK1DitEIEuVsFdsQ" href="/posts/27/votes?index=0">
+      <i class="fa-solid fa-caret-up pt-2"></i>
+      </a><!-- END app/views/posts/_post_vote.html.erb -->
+      <div class="d-flex flex-column">
+      <span class="text-10pt">
+      <%= link_to post.title, post_path(post.id), class:"text-dark text-decoration-none" %>
+      <a class="text-body text-decoration-none orange-hover fs-7 text-grey-url" target="_blank" href="<%= post.url %>">(<%= post.url%>)</a>
+      </span>
+      <span class="fs-7 text-grey-url"><%= post.score %> points by <%= post.author %></span>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+</div>

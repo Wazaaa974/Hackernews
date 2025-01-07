@@ -1,1 +1,38 @@
-<h1> This is the show of an article </h1>
+
+<div class="p-4 bg-gray">
+  <h1 class="text-dark fs-4"><%= @post.title %></h1>
+  <div class="d-flex gap-2">
+    <a class="grey-text text-decoration-none orange-hover" target="_blank" href="<%= @post.url %>">(<%= @post.url%>)</a> |
+    <span> <%=@post.post_type %>|</span>
+    <span>by  <%= @post.author %> |</span>
+    <span> <%= @post.score %> vote(s) |</span>
+    <span><%=@post.comments.count  %> comment(s)</span>
+  </div>
+</div>
+
+
+<%@post.comments.each do |comment| %>
+<div class="mt-3 border-orange">
+  <p class="text-dark"> <%= comment.created_at %> </p>
+  <p> <%= comment.content %> </p>
+  <p class="post-comment-author"><i> by <%= User.find(comment.user_id).username %></i></p>
+  <!-- BEGIN app/views/comment_reactions/_comment_reaction.html.erb -->
+  <div data-controller="emoji-picker" data-emoji-picker-comment-value=3 data-emoji-picker-user-value=6>
+    <div class="emojis-container">
+        <span class="emoji">😀</span>
+        <i class="fa-solid fa-face-smile" data-action="click->emoji-picker#displayEmojis">
+        </i>
+    </div>
+  </div>
+</div>
+
+<% end %>
+
+
+
+ <%= simple_form_for [@post, @comment] do |f| %>
+      <%= f.input :content %>
+      <%= f.submit "Submit your comment"%>
+    <% end %></div>
+
+<script>src="script.js"</script>
